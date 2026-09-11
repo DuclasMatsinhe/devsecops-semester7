@@ -1,43 +1,56 @@
 # Semester 7 — Continuous Security Validation Pipeline
 
 ## Project
-Implementation of a Continuous Security Validation Pipeline for Cloud-Based Applications.
 
-## Semester 7 baseline architecture
+Implementation of an integrated **DevSecOps Continuous Security Validation Pipeline for Cloud-Native Applications**.
 
-Developer
-→ GitHub Repository
-→ GitHub Actions CI/CD
-→ SAST + SCA + Secret Scanning
-→ Security Validation
-→ Security Gate
-→ Docker Build
-→ Test Deployment
+The project integrates automated security validation into the CI/CD lifecycle using multiple security scanners and a custom **Security Validation Engine**. The engine normalizes findings from different security tools, evaluates their severity according to a defined security policy, and produces an explicit **security-gate decision** before the Docker build stage.
 
-## Initial technology stack
+The goal is to support continuous, automated security validation and prevent builds from progressing when blocking security findings are detected.
 
-- Python + Flask
-- GitHub
-- GitHub Actions
-- Semgrep (SAST)
-- pip-audit (SCA)
-- Gitleaks (secret scanning)
-- Docker
+---
 
-## Current implementation status
+## Architecture
 
-1. Flask application scaffold
-2. Automated application test
-3. CI workflow
-4. SAST stage
-5. SCA stage
-6. Secret scanning stage
-7. Docker build stage
+Developer  
+↓  
+GitHub Repository  
+↓  
+GitHub Actions CI/CD  
+↓  
+Application Tests  
+↓  
+SAST + SCA + Secret Scanning  
+↓  
+Security Validation Engine  
+↓  
+Security Policy Evaluation  
+↓  
+Security Gate  
+↓  
+Docker Build  
+↓  
+Test Deployment
 
-## Next milestones
+### Security Validation Flow
 
-- Verify the pipeline with a clean commit.
-- Confirm each scanner produces usable output.
-- Implement an explicit security-policy/gate layer.
-- Add controlled test vulnerabilities.
-- Add test deployment.
+```text
+Semgrep ────────┐
+                │
+pip-audit ──────┼──→ SecurityFinding
+                │          │
+Gitleaks ───────┘          ↓
+                   SecurityValidationEngine
+                            │
+                            ↓
+                    Severity Evaluation
+                            │
+                            ↓
+                     Security Policy
+                            │
+                    ┌───────┴───────┐
+                    ↓               ↓
+                 PASSED           FAILED
+                    │               │
+                    ↓               ↓
+              Docker Build      Pipeline Stops
