@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+
+# Generated security scan reports
+gitleaks-report.json
+scan-output.txt
+
+# Local test artifacts
+gitleaks-test/

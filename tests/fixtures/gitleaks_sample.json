@@ -1,0 +1,8 @@
+[
+  {
+    "RuleID": "generic-api-key",
+    "Description": "Generic API Key",
+    "File": "config.py",
+    "StartLine": 12
+  }
+]

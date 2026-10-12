@@ -1,0 +1,17 @@
+{
+  "dependencies": [
+    {
+      "name": "pytest",
+      "version": "8.4.2",
+      "vulns": [
+        {
+          "id": "PYSEC-2026-1845",
+          "description": "Example pytest vulnerability.",
+          "fix_versions": [
+            "9.0.3"
+          ]
+        }
+      ]
+    }
+  ]
+}
