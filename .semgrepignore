@@ -1,0 +1,3 @@
+﻿# Intentionally vulnerable standalone fixture used to demonstrate Semgrep findings.
+# Keep it out of the normal application scan.
+semgrep_test.py
