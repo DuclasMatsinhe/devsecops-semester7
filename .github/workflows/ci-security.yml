@@ -2,9 +2,13 @@ name: CI - Continuous Security Validation
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
+      - securegate-development
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
+      - securegate-development
 
 permissions:
   contents: read
